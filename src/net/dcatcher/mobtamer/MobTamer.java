@@ -23,7 +23,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 @Mod(modid="MobTamer", name="MobTamer", version="0.0.9")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false, channels={"DCModJam"}, packetHandler	= DCPacketHandler.class)
 public class MobTamer {
-	
 
 	
 	@Instance

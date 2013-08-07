@@ -1,6 +1,6 @@
 package net.dcatcher.mobtamer.items;
 
-import net.dcatcher.mobtamer.ModJam;
+import net.dcatcher.mobtamer.MobTamer;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
@@ -12,7 +12,7 @@ public class ItemMobTamer extends Item {
 		super(par1);
 		setUnlocalizedName("mobTamer");
 		setMaxStackSize(1);
-		setCreativeTab(ModJam.tabJam);
+		setCreativeTab(MobTamer.tabJam);
 	}
 	
 	@Override
