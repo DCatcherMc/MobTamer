@@ -1,0 +1,18 @@
+[
+{
+  "modid": "MobTamer",
+  "name": "MobTamer",
+  "description": "Become the mob tamer you have always wanted to be! Tame creepers follow you! FOR GOOD REASONS!",
+  "version": "1.0.0",
+  "credits": "Created by DCatcher",
+  "mcversion": "",
+  "url": "http://github.com/DCatcherMc/MobTamer",
+  "updateUrl": "",
+  "authors": [ "DCatcher" ],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": [
+         "Minecraft Forge"
+]
+}
+]

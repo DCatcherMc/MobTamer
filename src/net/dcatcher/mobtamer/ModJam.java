@@ -20,7 +20,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
 
-@Mod(modid="MobTamer", name="MobTamer", version="1.0.0")
+@Mod(modid="MobTamer", name="MobTamer", version="0.0.9")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false, channels={"DCModJam"}, packetHandler	= DCPacketHandler.class)
 public class ModJam {
 	
@@ -28,6 +28,7 @@ public class ModJam {
 	
 	@Instance
 	public static ModJam instance = new ModJam();
+
 	
 	@SidedProxy(clientSide="net.dcatcher.mobtamer.proxy.ClientProxy", serverSide="net.dcatcher.mobtamer.proxy.CommonProxy")
 	public static CommonProxy proxy;
