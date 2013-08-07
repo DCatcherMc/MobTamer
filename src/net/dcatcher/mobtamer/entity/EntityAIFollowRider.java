@@ -1,5 +1,6 @@
 package net.dcatcher.mobtamer.entity;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,14 +56,12 @@ public class EntityAIFollowRider extends EntityAIBase
         }
         else
         {
-            this.rider = this.temptedEntity.worldObj.getClosestPlayerToEntity(this.temptedEntity, 10.0D);
+            Entity entity = this.temptedEntity.worldObj.getClosestPlayerToEntity(this.temptedEntity, 10.0D);
 
-            if (this.rider == null)
-            {
-                return false;
+            if(this.rider != null && this.rider instanceof EntityPlayer && this.rider == (EntityPlayer)entity){
+                return true;
             }
-
-            return true;
+            return false;
         }
     }
 
