@@ -22,12 +22,12 @@ import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(modid="MobTamer", name="MobTamer", version="0.0.9")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false, channels={"DCModJam"}, packetHandler	= DCPacketHandler.class)
-public class ModJam {
+public class MobTamer {
 	
 
 	
 	@Instance
-	public static ModJam instance = new ModJam();
+	public static MobTamer instance = new MobTamer();
 
 	
 	@SidedProxy(clientSide="net.dcatcher.mobtamer.proxy.ClientProxy", serverSide="net.dcatcher.mobtamer.proxy.CommonProxy")
