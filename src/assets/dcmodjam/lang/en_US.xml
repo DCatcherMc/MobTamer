@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+    <comment>English (en_US) Localization File</comment>
+    <entry key="itemGroup.DCatcherTab">Mob Tamer</entry>
+    <entry key="tile.blockInfusedBrick.name">Infused Bricks</entry>
+    <entry key="item.shardDiamond.name">Shard of Diamond</entry>
+    <entry key="item.mobTamer.name">Mystic Saddle</entry>
+    <entry key="item.wandOfRiding.name">Wand of Riding</entry>
+    <entry key="item.itemInfusionDust.name">Infusion Dust</entry>
+
+    <entry key="item.foodBeefInfused.name">Infused Beef</entry>
+    <entry key="item.foodPorkInfused.name">Infused Porkchop</entry>
+    <entry key="item.foodMuttonRaw.name">Raw Mutton</entry>
+    <entry key="item.foodMuttonCooked.name">Cooked Mutton</entry>
+    <entry key="item.foodMuttonInfused.name">Infused Mutton</entry>
+    <entry key="item.foodAppleInfused.name">Infused Apple</entry>
+    <entry key="item.foodBreadInfused.name">Infused Bread</entry>
+</properties>

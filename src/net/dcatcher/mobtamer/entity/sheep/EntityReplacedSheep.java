@@ -6,6 +6,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.dcatcher.mobtamer.entity.EntityAIFollowRider;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingData;
@@ -58,6 +59,7 @@ public class EntityReplacedSheep extends EntityAnimal implements IShearable
         this.setSize(0.9F, 1.3F);
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIFollowRider(this, 1.1D, getRider()));
         this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
         this.tasks.addTask(3, new EntityAITempt(this, 1.1D, Item.wheat.itemID, false));
@@ -355,5 +357,9 @@ public class EntityReplacedSheep extends EntityAnimal implements IShearable
     @Override
     public boolean canBeSteered() {
     	return true;
+    }
+
+    public EntityPlayer getRider(){
+        return (EntityPlayer)this.riddenByEntity;
     }
 }

@@ -1,84 +1,145 @@
 package net.dcatcher.mobtamer.entity;
 
-import java.util.Iterator;
-import java.util.List;
-
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class EntityAIFollowRider extends EntityAIBase{
-	
-	EntityPlayer lastRider;
-	EntityAnimal tamedMob;
-	
-	double speed;
-    private int something;
+public class EntityAIFollowRider extends EntityAIBase
+{
+    /** The entity using this AI that is tempted by the player. */
+    private EntityCreature temptedEntity;
+    private double field_75282_b;
+    private double playerPosX;
+    private double playerPosY;
+    private double playerPosZ;
+    private double playerRotationPitch;
+    private double playerRotationYaw;
 
-	
-	public EntityAIFollowRider(EntityAnimal entityAnimal, EntityPlayer rider, double par3){
-		this.tamedMob = entityAnimal;
-		this.lastRider = rider;
-		this.speed = par3;
-	}
+    /** The player that is tempting the entity that is using this AI. */
+    private EntityPlayer rider;
 
-	@Override
-	public boolean shouldExecute() {
-		
-		 List list = this.tamedMob.worldObj.getEntitiesWithinAABB(this.tamedMob.getClass(), this.tamedMob.boundingBox.expand(8.0D, 4.0D, 8.0D));
-         EntityPlayer player = null;
-         double d0 = Double.MAX_VALUE;
-         Iterator iterator = list.iterator();
+    /**
+     * A counter that is decremented each time the shouldExecute method is called. The shouldExecute method will always
+     * return false if delayTemptCounter is greater than 0.
+     */
+    private int delayTemptCounter;
+    private boolean field_75287_j;
 
-         while (iterator.hasNext())
-         {
-        	 if(iterator.next() instanceof EntityPlayer){
-             EntityPlayer entityplayer1 = (EntityPlayer)iterator.next();
+    /**
+     * This field saves the ID of the items that can be used to breed entities with this behaviour.
+     */
+    private int breedingFood;
 
-                 double d1 = this.tamedMob.getDistanceSqToEntity(entityplayer1);
+    /**
+     * Whether the entity using this AI will be scared by the tempter's sudden movement.
+     */
+    private boolean field_75286_m;
 
-                 if (d1 <= d0)
-                 {
-                     d0 = d1;
-                     player = entityplayer1;
-             }
-         }
-         }
-         if (player == null)
-         {
-             return false;
-         }
-         else if (d0 < 9.0D)
-         {
-             return false;
-         }
-         else
-         {
-             this.lastRider = player;
-             return true;
-         }
-	}
-	
-	public boolean continueExecuting()
+    public EntityAIFollowRider(EntityCreature par1EntityCreature, double par2, EntityPlayer player)
     {
-        if (!this.lastRider.isEntityAlive())
+        this.temptedEntity = par1EntityCreature;
+        this.rider = player;
+        this.field_75282_b = par2;
+        this.setMutexBits(3);
+    }
+
+    /**
+     * Returns whether the EntityAIBase should begin execution.
+     */
+    public boolean shouldExecute()
+    {
+        if (this.delayTemptCounter > 0)
         {
+            --this.delayTemptCounter;
             return false;
         }
         else
         {
-            double d0 = this.tamedMob.getDistanceSqToEntity(this.lastRider);
-            return d0 >= 9.0D && d0 <= 256.0D;
+            this.rider = this.temptedEntity.worldObj.getClosestPlayerToEntity(this.temptedEntity, 10.0D);
+
+            if (this.rider == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
-	 
-	public void updateTask()
-	    {
-	        if (--this.something <= 0)
-	        {
-	            this.something = 10;
-	            this.tamedMob.getNavigator().tryMoveToEntityLiving(this.lastRider, this.speed);
-	        }
-	    }
 
+    /**
+     * Returns whether an in-progress EntityAIBase should continue executing
+     */
+    public boolean continueExecuting()
+    {
+            if (this.temptedEntity.getDistanceSqToEntity(this.rider) < 36.0D)
+            {
+                if (this.rider.getDistanceSq(this.playerPosX, this.playerPosY, this.playerPosZ) > 0.010000000000000002D)
+                {
+                    return false;
+                }
+
+                if (Math.abs((double)this.rider.rotationPitch - this.playerRotationPitch) > 5.0D || Math.abs((double)this.rider.rotationYaw - this.playerRotationYaw) > 5.0D)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                this.playerPosX = this.rider.posX;
+                this.playerPosY = this.rider.posY;
+                this.playerPosZ = this.rider.posZ;
+            }
+
+            this.playerRotationPitch = (double)this.rider.rotationPitch;
+            this.playerRotationYaw = (double)this.rider.rotationYaw;
+        return this.shouldExecute();
+    }
+
+
+    /**
+     * Execute a one shot task or start executing a continuous task
+     */
+    public void startExecuting()
+    {
+        this.playerPosX = this.rider.posX;
+        this.playerPosY = this.rider.posY;
+        this.playerPosZ = this.rider.posZ;
+        this.field_75287_j = true;
+        this.field_75286_m = this.temptedEntity.getNavigator().getAvoidsWater();
+        this.temptedEntity.getNavigator().setAvoidsWater(false);
+    }
+
+    /**
+     * Resets the task
+     */
+    public void resetTask()
+    {
+        this.rider = null;
+        this.temptedEntity.getNavigator().clearPathEntity();
+        this.delayTemptCounter = 100;
+        this.field_75287_j = false;
+        this.temptedEntity.getNavigator().setAvoidsWater(this.field_75286_m);
+    }
+
+    /**
+     * Updates the task
+     */
+    public void updateTask()
+    {
+        this.temptedEntity.getLookHelper().setLookPositionWithEntity(this.rider, 30.0F, (float)this.temptedEntity.getVerticalFaceSpeed());
+
+        if (this.temptedEntity.getDistanceSqToEntity(this.rider) < 6.25D)
+        {
+            this.temptedEntity.getNavigator().clearPathEntity();
+        }
+        else
+        {
+            this.temptedEntity.getNavigator().tryMoveToEntityLiving(this.rider, this.field_75282_b);
+        }
+    }
+
+    public boolean func_75277_f()
+    {
+        return this.field_75287_j;
+    }
 }

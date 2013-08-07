@@ -46,7 +46,7 @@ public class MobTamer {
 		BlockHandler.register(); 			//Registers ALL the blocks!
 		ItemHandler.registerItems();		//registers items
 		proxy.registerRendering();			//Registers the rendering stuffs
-		LanguageHandler.registerLangs();	//Registers my language stuffs
+		LanguageHandler.loadLangs();	//Registers my language stuffs
 		EntityHandler.register();			//Registers the entities :)
 		DCRecipes.registerRecipes();		//Registers recipes
 	}

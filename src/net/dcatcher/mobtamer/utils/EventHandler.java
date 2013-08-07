@@ -11,13 +11,9 @@ import net.dcatcher.mobtamer.entity.sheep.EntityReplacedSheep;
 import net.dcatcher.mobtamer.items.ItemHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntitySlime;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
@@ -61,16 +57,18 @@ public class EventHandler {
 					e.setFleeceColor(color);
 					world.spawnEntityInWorld(e);
 				}
+                player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 			
 			
-			if(entity instanceof EntityCow && !entity.isChild()){
+			if(entity instanceof EntityCow && !entity.isChild() && !(entity instanceof EntityMooshroom)){
 				entity.setDead();
 				Entity e = new EntityReplacedCow(world);
 				e.setLocationAndAngles(xCoord, yCoord, zCoord, yaw, pitch);
 				if(!world.isRemote){
 					world.spawnEntityInWorld(e);
 				}
+                player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 				
 			if(entity instanceof EntityEnderman && !entity.isChild()){
@@ -80,15 +78,17 @@ public class EventHandler {
 				if(!world.isRemote){
 					world.spawnEntityInWorld(e);
 				}
+                player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 			
-			if(entity instanceof EntitySpider && !entity.isChild()){
+			if(entity instanceof EntitySpider && !entity.isChild() && !(entity instanceof EntityCaveSpider)){
 				entity.setDead();
 				Entity e = new EntityReplacedSpider(world);
 				e.setLocationAndAngles(xCoord, yCoord, zCoord, yaw, pitch);
 				if(!world.isRemote){
 					world.spawnEntityInWorld(e);
 				}
+                player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 			
 			if(entity instanceof EntityCreeper && !entity.isChild()){
@@ -98,6 +98,7 @@ public class EventHandler {
 				if(!world.isRemote){
 					world.spawnEntityInWorld(e);
 				}
+                player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 			
 			if(entity instanceof EntityZombie && !entity.isChild()){
@@ -107,6 +108,7 @@ public class EventHandler {
 				if(!world.isRemote){
 					world.spawnEntityInWorld(e);
 				}
+                player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
 			
 			if(entity instanceof EntitySkeleton && !entity.isChild()){
@@ -116,25 +118,13 @@ public class EventHandler {
 				if(!world.isRemote){
 					world.spawnEntityInWorld(e);
 				}
+                player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}
-			
-			
+
 			if(entity instanceof EntityPig && !entity.isChild()){
 				((EntityPig) entity).setSaddled(true);
-				}
-			
-			
-			if(entity instanceof EntitySlime){
-				int size = ((EntitySlime) entity).getSlimeSize();
-				entity.setDead();
-				Entity e = new EntityReplacedSlime(world);
-				e.setLocationAndAngles(xCoord, yCoord, zCoord, yaw, pitch);
-				((EntityReplacedSlime) e).setSlimeSize(size);
-				if(!world.isRemote){
-					world.spawnEntityInWorld(e);
-				}
-			}
-			player.inventory.decrStackSize(player.inventory.currentItem, 1);
+                player.inventory.decrStackSize(player.inventory.currentItem, 1);
+            }
 		}
 		
 	}
