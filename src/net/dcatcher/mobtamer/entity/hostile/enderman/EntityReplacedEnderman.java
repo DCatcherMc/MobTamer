@@ -50,7 +50,7 @@ public class EntityReplacedEnderman extends EntityTameable implements IAnimals
         this.tasks.addTask(0, new EntityAIControlledByPlayer(this, 0.6F));
         this.tasks.addTask(1, new EntityAIWander(this, 1D));
         this.tasks.addTask(2, new EntityAILookIdle(this));
-        this.tasks.addTask(3, new EntityAIFollowOwner(this, 5D, 3, 20));
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
 
     }
     

@@ -25,7 +25,7 @@ public class EntityReplacedCow extends EntityTameable implements IAnimals
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAIControlledByPlayer(this, 0.6F));
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIFollowOwner(this, 5D, 3, 20));
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(2, new EntityAIPanic(this, 2.0D));
         this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
         this.tasks.addTask(4, new EntityAITempt(this, 1.25D, Item.wheat.itemID, false));

@@ -53,7 +53,7 @@ public class EntityReplacedSheep extends EntityTameable implements IAnimals, ISh
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-        this.tasks.addTask(2, new EntityAIFollowOwner(this, 5D, 3, 20));
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
         this.tasks.addTask(3, new EntityAITempt(this, 1.1D, Item.wheat.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
@@ -104,7 +104,6 @@ public class EntityReplacedSheep extends EntityTameable implements IAnimals, ISh
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(16, new Byte((byte)0));
     }
 
     /**

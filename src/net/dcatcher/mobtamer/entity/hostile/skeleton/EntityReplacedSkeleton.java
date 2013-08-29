@@ -41,7 +41,7 @@ public class EntityReplacedSkeleton extends EntityTameable implements IAnimals, 
         this.setSize(0.8f, 2.4f);
         this.tasks.addTask(0, new EntityAIControlledByPlayer(this, 0.4F));
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIFollowOwner(this, 5D, 3, 20));
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(2, new EntityAIRestrictSun(this));
         this.tasks.addTask(3, new EntityAIFleeSun(this, 0.3D));
         this.tasks.addTask(5, new EntityAIWander(this, 0.3D));

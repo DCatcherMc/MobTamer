@@ -39,7 +39,7 @@ public class EntityReplacedCreeper extends EntityTameable implements IAnimals
     	this.setSize(1, 2.1F);
         this.tasks.addTask(0, new EntityAIControlledByPlayer(this, 0.7F));
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIFollowOwner(this, 5D, 3, 20));
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, false));
         this.tasks.addTask(5, new EntityAIWander(this, 0.8D));
@@ -82,12 +82,7 @@ public class EntityReplacedCreeper extends EntityTameable implements IAnimals
         }
     }
 
-    protected void entityInit()
-    {
-        super.entityInit();
-        this.dataWatcher.addObject(16, Byte.valueOf((byte) - 1));
-        this.dataWatcher.addObject(17, Byte.valueOf((byte)0));
-    }
+
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
