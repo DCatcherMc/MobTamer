@@ -11,17 +11,10 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIControlledByPlayer;
-import net.minecraft.entity.ai.EntityAIEatGrass;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -33,7 +26,7 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.common.IShearable;
 
-public class EntityReplacedSheep extends EntityAnimal implements IShearable
+public class EntityReplacedSheep extends EntityTameable implements IAnimals, IShearable
 {
 	
     private final InventoryCrafting field_90016_e = new InventoryCrafting(new ContainerSheep(this), 2, 1);
@@ -59,8 +52,8 @@ public class EntityReplacedSheep extends EntityAnimal implements IShearable
         this.setSize(0.9F, 1.3F);
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIFollowRider(this, 1.1D, getRider()));
         this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
+        this.tasks.addTask(2, new EntityAIFollowOwner(this, 5D, 3, 20));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
         this.tasks.addTask(3, new EntityAITempt(this, 1.1D, Item.wheat.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));

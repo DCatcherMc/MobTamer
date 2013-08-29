@@ -13,18 +13,10 @@ import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIControlledByPlayer;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIRestrictSun;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
@@ -38,7 +30,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderHell;
 
-public class EntityReplacedSkeleton extends EntityAnimal implements IRangedAttackMob
+public class EntityReplacedSkeleton extends EntityTameable implements IAnimals, IRangedAttackMob
 {
     private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
     private EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
@@ -49,6 +41,7 @@ public class EntityReplacedSkeleton extends EntityAnimal implements IRangedAttac
         this.setSize(0.8f, 2.4f);
         this.tasks.addTask(0, new EntityAIControlledByPlayer(this, 0.4F));
         this.tasks.addTask(1, new EntityAISwimming(this));
+        this.tasks.addTask(2, new EntityAIFollowOwner(this, 5D, 3, 20));
         this.tasks.addTask(2, new EntityAIRestrictSun(this));
         this.tasks.addTask(3, new EntityAIFleeSun(this, 0.3D));
         this.tasks.addTask(5, new EntityAIWander(this, 0.3D));

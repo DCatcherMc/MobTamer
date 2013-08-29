@@ -26,10 +26,6 @@ public class EntityAIFollowRider extends EntityAIBase
     private int delayTemptCounter;
     private boolean field_75287_j;
 
-    /**
-     * This field saves the ID of the items that can be used to breed entities with this behaviour.
-     */
-    private int breedingFood;
 
     /**
      * Whether the entity using this AI will be scared by the tempter's sudden movement.
@@ -58,7 +54,7 @@ public class EntityAIFollowRider extends EntityAIBase
         {
             Entity entity = this.temptedEntity.worldObj.getClosestPlayerToEntity(this.temptedEntity, 10.0D);
 
-            if(this.rider != null && this.rider instanceof EntityPlayer && this.rider == (EntityPlayer)entity){
+            if(this.rider != null && this.rider instanceof EntityPlayer && entity == this.rider){
                 return true;
             }
             return false;

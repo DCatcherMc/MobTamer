@@ -1,24 +1,23 @@
 package net.dcatcher.mobtamer.entity.cow;
 
+import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIControlledByPlayer;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntityReplacedCow extends EntityAnimal
+public class EntityReplacedCow extends EntityTameable implements IAnimals
 {
+    private boolean isTamed;
+
+
     public EntityReplacedCow(World par1World)
     {
         super(par1World);
@@ -26,6 +25,7 @@ public class EntityReplacedCow extends EntityAnimal
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAIControlledByPlayer(this, 0.6F));
         this.tasks.addTask(1, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIFollowOwner(this, 5D, 3, 20));
         this.tasks.addTask(2, new EntityAIPanic(this, 2.0D));
         this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
         this.tasks.addTask(4, new EntityAITempt(this, 1.25D, Item.wheat.itemID, false));
@@ -34,6 +34,7 @@ public class EntityReplacedCow extends EntityAnimal
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
     }
+
 
     /**
      * Returns true if the newer Entity AI code should be run
@@ -162,6 +163,11 @@ public class EntityReplacedCow extends EntityAnimal
         return new EntityReplacedCow(this.worldObj);
     }
 
+    @Override
+    public void setTamed(boolean par1){
+        super.setTamed(par1);
+    }
+
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable)
     {
         return this.spawnBabyAnimal(par1EntityAgeable);
@@ -170,5 +176,21 @@ public class EntityReplacedCow extends EntityAnimal
     @Override
     public boolean canBeSteered() {
     	return true;
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        par1NBTTagCompound.setBoolean("tamed", this.isTamed);
+        par1NBTTagCompound.setString("owner", this.getOwnerName());
+    }
+
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        isTamed = par1NBTTagCompound.getBoolean("tamed");
+        if(isTamed){
+            setTamed(true);
+        }
+        setOwner(par1NBTTagCompound.getString("owner"));
     }
 }

@@ -63,10 +63,12 @@ public class EventHandler {
 			
 			if(entity instanceof EntityCow && !entity.isChild() && !(entity instanceof EntityMooshroom)){
 				entity.setDead();
-				Entity e = new EntityReplacedCow(world);
+				EntityReplacedCow e = new EntityReplacedCow(world);
 				e.setLocationAndAngles(xCoord, yCoord, zCoord, yaw, pitch);
 				if(!world.isRemote){
 					world.spawnEntityInWorld(e);
+                    e.setOwner(player.username);
+                    e.setTamed(true);
 				}
                 player.inventory.decrStackSize(player.inventory.currentItem, 1);
 			}

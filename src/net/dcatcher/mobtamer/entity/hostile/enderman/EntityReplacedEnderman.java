@@ -7,11 +7,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
+import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.attributes.AttributeInstance;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,7 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 
-public class EntityReplacedEnderman extends EntityAnimal
+public class EntityReplacedEnderman extends EntityTameable implements IAnimals
 {
     private static final UUID field_110192_bp = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291A0");
     private static final AttributeModifier field_110193_bq = (new AttributeModifier(field_110192_bp, "Attacking speed boost", 6.199999809265137D, 0)).func_111168_a(false);
@@ -47,6 +50,7 @@ public class EntityReplacedEnderman extends EntityAnimal
         this.tasks.addTask(0, new EntityAIControlledByPlayer(this, 0.6F));
         this.tasks.addTask(1, new EntityAIWander(this, 1D));
         this.tasks.addTask(2, new EntityAILookIdle(this));
+        this.tasks.addTask(3, new EntityAIFollowOwner(this, 5D, 3, 20));
 
     }
     

@@ -5,24 +5,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIControlledByPlayer;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntityReplacedCreeper extends EntityAnimal
+public class EntityReplacedCreeper extends EntityTameable implements IAnimals
 {
     /**
      * Time when this creeper was last in an active state (Messed up code here, probably causes creeper animation to go
@@ -45,6 +39,7 @@ public class EntityReplacedCreeper extends EntityAnimal
     	this.setSize(1, 2.1F);
         this.tasks.addTask(0, new EntityAIControlledByPlayer(this, 0.7F));
         this.tasks.addTask(1, new EntityAISwimming(this));
+        this.tasks.addTask(2, new EntityAIFollowOwner(this, 5D, 3, 20));
         this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, false));
         this.tasks.addTask(5, new EntityAIWander(this, 0.8D));
