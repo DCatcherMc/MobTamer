@@ -90,14 +90,6 @@ public class EntityReplacedCreeper extends EntityTameable implements IAnimals
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeEntityToNBT(par1NBTTagCompound);
-
-        if (this.dataWatcher.getWatchableObjectByte(17) == 1)
-        {
-            par1NBTTagCompound.setBoolean("powered", true);
-        }
-
-        par1NBTTagCompound.setShort("Fuse", (short)this.fuseTime);
-        par1NBTTagCompound.setByte("ExplosionRadius", (byte)this.explosionRadius);
     }
 
     /**
@@ -106,17 +98,7 @@ public class EntityReplacedCreeper extends EntityTameable implements IAnimals
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.readEntityFromNBT(par1NBTTagCompound);
-        this.dataWatcher.updateObject(17, Byte.valueOf((byte)(par1NBTTagCompound.getBoolean("powered") ? 1 : 0)));
 
-        if (par1NBTTagCompound.hasKey("Fuse"))
-        {
-            this.fuseTime = par1NBTTagCompound.getShort("Fuse");
-        }
-
-        if (par1NBTTagCompound.hasKey("ExplosionRadius"))
-        {
-            this.explosionRadius = par1NBTTagCompound.getByte("ExplosionRadius");
-        }
     }
 
     /**
@@ -192,7 +174,7 @@ public class EntityReplacedCreeper extends EntityTameable implements IAnimals
      */
     public boolean getPowered()
     {
-        return this.dataWatcher.getWatchableObjectByte(17) == 1;
+        return false;
     }
 
     @SideOnly(Side.CLIENT)

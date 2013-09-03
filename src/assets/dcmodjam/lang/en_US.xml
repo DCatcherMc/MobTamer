@@ -2,9 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
     <comment>English (en_US) Localization File</comment>
-    <entry key="itemGroup.DCatcherTab">Mob Tamer</entry>
-    <entry key="tile.blockInfusedBrick.name">Infused Bricks</entry>
-    <entry key="item.shardDiamond.name">Shard of Diamond</entry>
+    <entry key="itemGroup.DCatcherTab">TamableMobs</entry>
     <entry key="item.mobTamer.name">Mystic Saddle</entry>
     <entry key="item.wandOfRiding.name">Wand of Riding</entry>
     <entry key="item.itemInfusionDust.name">Infusion Dust</entry>
@@ -16,4 +14,15 @@
     <entry key="item.foodMuttonInfused.name">Infused Mutton</entry>
     <entry key="item.foodAppleInfused.name">Infused Apple</entry>
     <entry key="item.foodBreadInfused.name">Infused Bread</entry>
+
+    <entry key="entity.MobTamer.TamedSheep.name">Tamed Sheep</entry>
+    <entry key="entity.MobTamer.TamedCow.name">Tamed Cow</entry>
+    <entry key="entity.MobTamer.TamedEnderman.name">Tamed Enderman</entry>
+    <entry key="entity.MobTamer.TamedSpider.name">Tamed Spider</entry>
+    <entry key="entity.MobTamer.TamedCreeper.name">Tamed Creeper</entry>
+    <entry key="entity.MobTamer.TamedZombie.name">Tamed Zombie</entry>
+    <entry key="entity.MobTamer.TamedSkeleton.name">Tamed Skeleton</entry>
+    
+    <entry key="achievement.tameAchieve">Tamed!</entry>
+    <entry key="achievement.tameAchieve.desc">You successfully tamed a mob!</entry>
 </properties>

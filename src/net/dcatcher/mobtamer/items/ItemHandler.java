@@ -6,9 +6,7 @@ import net.dcatcher.mobtamer.items.food.*;
 
 public class ItemHandler {
 
-	public static Item diamondShard;
-	
-	public static Item disguiser, wandOfGrowth, wandOfRiding;
+	public static Item disguiser, wandOfRiding;
 	
 	public static Item itemBeefInfused, itemPorkInfused, itemMuttonRaw, itemMuttonCooked, itemMuttonInfused,
 						itemBreadInfused, itemAppleInfused;
@@ -16,11 +14,8 @@ public class ItemHandler {
 	public static Item infusionDust;
 	
 	public static void registerItems(){
-		diamondShard = new ItemDiamondShard(DCConfig.idDiamondShard -256);
-		
-		disguiser = new ItemMobTamer(DCConfig.idDisguiser -256);
-		//wandOfGrowth = new ItemWandOfGrowth(DCConfig.idWandofGrowth -256);
-		wandOfRiding = new ItemWandOfRiding(DCConfig.idWandofRiding -256);
+		disguiser = new ItemMobTamer(DCConfig.idMysticSaddle -256);
+		wandOfRiding = new ItemWandOfRiding(DCConfig.idWandOfRiding -256);
 		
 		infusionDust = new ItemInfusionDust(DCConfig.idInfusionDust -256);
 		

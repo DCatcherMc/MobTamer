@@ -1,6 +1,6 @@
 package net.dcatcher.mobtamer;
 
-import net.dcatcher.mobtamer.blocks.BlockHandler;
+import net.dcatcher.mobtamer.achievement.AchievementHandler;
 import net.dcatcher.mobtamer.entity.EntityHandler;
 import net.dcatcher.mobtamer.items.ItemHandler;
 import net.dcatcher.mobtamer.proxy.CommonProxy;
@@ -43,12 +43,12 @@ public class MobTamer {
 	
 	@EventHandler
 	public void Init(FMLInitializationEvent e){
-		BlockHandler.register(); 			//Registers ALL the blocks!
 		ItemHandler.registerItems();		//registers items
 		proxy.registerRendering();			//Registers the rendering stuffs
 		LanguageHandler.loadLangs();	//Registers my language stuffs
 		EntityHandler.register();			//Registers the entities :)
 		DCRecipes.registerRecipes();		//Registers recipes
+        AchievementHandler.registerAchievements();
 	}
 	
 	@EventHandler
